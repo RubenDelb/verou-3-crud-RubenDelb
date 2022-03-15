@@ -25,13 +25,18 @@ class CardRepository
     }
 
     // Get all
-    public function get(): array
+    public function get(): PDOStatement
     {
         // TODO: replace dummy data by real one
-        return [
-            ['name' => 'dummy one'],
-            ['name' => 'dummy two'],
-        ];
+        $query = "SELECT * FROM movies";
+        $result = $this->databaseManager->connection->query($query);
+        return $result;
+        // return [
+        //     ['name' => 'dummy one'],
+        //     ['name' => 'dummy two'],
+        //     ['name' => 'dummy three'],
+        //     ['name' => 'dummy four'],
+        // ];
 
         // We get the database connection first, so we can apply our queries with it
         // return $this->databaseManager->connection-> (runYourQueryHere)
