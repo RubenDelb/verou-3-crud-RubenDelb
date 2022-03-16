@@ -13,9 +13,10 @@ class CardRepository
         $this->databaseManager = $databaseManager;
     }
 
-    public function create(): void
+    public function create($values): void
     {
-
+        $query = "INSERT INTO movies (`name`, genre, `description`) VALUES ($values);";
+        $this->databaseManager->connection->query($query);
     }
 
     // Get one
@@ -29,7 +30,7 @@ class CardRepository
     {
         // TODO: replace dummy data by real one
         $query = "SELECT * FROM movies";
-        $result = $this->databaseManager->connection->query($query);
+        $result = $this->databaseManager->connection->query($query);$this->databaseManager->connection->query($query);
         return $result;
         // return [
         //     ['name' => 'dummy one'],
