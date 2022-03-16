@@ -8,6 +8,13 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+function pre($array)
+{
+    echo "<pre>";
+    print_r($array);
+    echo "</pre>";
+}
+
 // Load you classes
 require_once 'config.php';
 require_once 'classes/DatabaseManager.php';
@@ -20,6 +27,7 @@ $databaseManager->connect();
 // Update the naming if you'd like to work with another collection
 $cardRepository = new CardRepository($databaseManager);
 $cards = $cardRepository->get();
+pre($cards);
 
 // Get the current action to execute
 // If nothing is specified, it will remain empty (home should be loaded)
@@ -29,10 +37,13 @@ $action = $_GET['action'] ?? null;
 // This system will help you to only execute the code you want, instead of all of it (or complex if statements)
 switch ($action) {
     case 'create':
-        $this->create();
+        create($cardRepository);
+        require 'overview.php';
         break;
     default:
-        $this->overview();
+        // overview();
+        require 'overview.php';
+        pre($_GET);
         break;
 }
 
@@ -43,7 +54,9 @@ function overview()
     require 'overview.php';
 }
 
-function create()
+function create($cardRepository)
 {
     // TODO: provide the create logic
+    $values = "'{$_GET['movieName']}', '{$_GET['genre']}', '{$_GET['description']}'";
+    $cardRepository->create($values);
 }
