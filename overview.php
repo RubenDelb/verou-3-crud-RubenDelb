@@ -15,16 +15,18 @@
     <th style="border: solid 1px">Name</th>
     <th style="border: solid 1px">Genre</th>
     <th style="border: solid 1px">Description</th>
+    <th style="border: solid 1px">Update</th>
     <?php foreach ($cards as $card) : ?>
         <tr>
             <td style="border-bottom: solid 1px;"><?= $card['name'] ?></td>
             <td style="border-bottom: solid 1px;"><?= $card['genre'] ?></td>
             <td style="border-bottom: solid 1px;"><?= $card['description'] ?></td>
+            <td style="border-bottom: solid 1px;"><a href="<?= "?id={$card['id']}&movieName={$card['name']}&genre={$card['genre']}&description={$card['description']}&action=update"?>">Update</a></td>
         </tr>
     <?php endforeach; ?>
 </table>
 
-<a href="create.php">Create new movie</a>
+<a href="index.php?action=create">Create new movie</a>
 
 <?php pre($_GET);?>
 </body>
