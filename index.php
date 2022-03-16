@@ -8,6 +8,11 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+session_start();
+if(!empty($_GET['id'])){
+    $_SESSION['id'] = $_GET['id'];
+}
+
 function pre($array)
 {
     echo "<pre>";
@@ -27,7 +32,6 @@ $databaseManager->connect();
 // Update the naming if you'd like to work with another collection
 $cardRepository = new CardRepository($databaseManager);
 $cards = $cardRepository->get();
-pre($cards);
 
 // Get the current action to execute
 // If nothing is specified, it will remain empty (home should be loaded)
@@ -41,8 +45,8 @@ switch ($action) {
         create($cardRepository);
         break;
     case 'update':
-        require 'update.php';
-        update($cardRepository);
+        update($databaseManager, $cardRepository);
+        break;
     default:
         // overview();
         require 'overview.php';
@@ -66,11 +70,17 @@ function create($cardRepository)
     }
 }
 
-function update($cardRepository)
+function update($databaseManager, $cardRepository): void
 {
     // Provide the create logic
-    if (!empty($_GET['movieName']) && !empty($_GET['genre']) && !empty($_GET['description'])){
-        $values = "'{$_GET['movieName']}', '{$_GET['genre']}', '{$_GET['description']}'";
-        $cardRepository->update($values);
+    $query = "SELECT * FROM movies WHERE id= '{$_SESSION['id']}'"; // Fetch data from the table movies using id
+    $result = $databaseManager->connection->query($query);
+    $fetch = $result->fetch(PDO::FETCH_ASSOC);
+    pre($fetch);
+    // $singleRow = mysqli_fetch_assoc($result);
+    pre($_GET);
+    require 'update.php';
+    if (!empty($_GET['movieName'])){
+        $cardRepository->update($fetch);
     }
 }
