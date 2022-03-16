@@ -17,6 +17,7 @@ class CardRepository
     {
         $query = "INSERT IGNORE INTO movies (`name`, genre, `description`) VALUES ($values);";
         $this->databaseManager->connection->query($query);
+        header('Location: index.php');
     }
 
     // Get one
@@ -30,16 +31,17 @@ class CardRepository
     {
         // TODO: replace dummy data by real one
         $query = "SELECT * FROM movies";
-        $result = $this->databaseManager->connection->query($query);$this->databaseManager->connection->query($query);
+        $result = $this->databaseManager->connection->query($query);
         return $result;
         // We get the database connection first, so we can apply our queries with it
         // return $this->databaseManager->connection-> (runYourQueryHere)
     }
 
-    public function update($values): void
+    public function update($array): void
     {
-        $query = "UPDATE movies SET `name` = '{$_GET['movieName']}', genre = '{$_GET['genre']}', `description` = '{$_GET['description']}' WHERE id = {$_GET['id']};";
+        $query = "UPDATE movies SET `name` = '{$_GET['movieName']}', genre = '{$_GET['genre']}', `description` = '{$_GET['description']}' WHERE id = '{$_SESSION['id']}';";
         $this->databaseManager->connection->query($query);
+        header('Location: index.php');
     }
 
     public function delete(): void
