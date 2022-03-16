@@ -9,13 +9,23 @@
 </head>
 <body>
 
-<h1>Goodcard - track your collection of Pokémon cards</h1>
+<h1>Movies - Track your collection of your favorite Movies</h1>
 
-<ul>
+<table style="text-align: center; border: solid 1px; padding: 10px;">
+    <th style="border: solid 1px">Name</th>
+    <th style="border: solid 1px">Genre</th>
+    <th style="border: solid 1px">Description</th>
     <?php foreach ($cards as $card) : ?>
-        <li><?= $card['name'] ?></li>
+        <tr>
+            <td style="border-bottom: solid 1px;"><?= $card['name'] ?></td>
+            <td style="border-bottom: solid 1px;"><?= $card['genre'] ?></td>
+            <td style="border-bottom: solid 1px;"><?= $card['description'] ?></td>
+        </tr>
     <?php endforeach; ?>
-</ul>
+</table>
 
+<a href="create.php">Create new movie</a>
+
+<?php pre($_GET);?>
 </body>
 </html>
