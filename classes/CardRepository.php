@@ -15,7 +15,7 @@ class CardRepository
 
     public function create($values): void
     {
-        $query = "INSERT INTO movies (`name`, genre, `description`) VALUES ($values);";
+        $query = "INSERT IGNORE INTO movies (`name`, genre, `description`) VALUES ($values);";
         $this->databaseManager->connection->query($query);
     }
 
@@ -32,20 +32,14 @@ class CardRepository
         $query = "SELECT * FROM movies";
         $result = $this->databaseManager->connection->query($query);$this->databaseManager->connection->query($query);
         return $result;
-        // return [
-        //     ['name' => 'dummy one'],
-        //     ['name' => 'dummy two'],
-        //     ['name' => 'dummy three'],
-        //     ['name' => 'dummy four'],
-        // ];
-
         // We get the database connection first, so we can apply our queries with it
         // return $this->databaseManager->connection-> (runYourQueryHere)
     }
 
-    public function update(): void
+    public function update($values): void
     {
-
+        $query = "UPDATE movies SET `name` = '{$_GET['movieName']}', genre = '{$_GET['genre']}', `description` = '{$_GET['description']}' WHERE id = {$_GET['id']};";
+        $this->databaseManager->connection->query($query);
     }
 
     public function delete(): void
