@@ -37,9 +37,12 @@ $action = $_GET['action'] ?? null;
 // This system will help you to only execute the code you want, instead of all of it (or complex if statements)
 switch ($action) {
     case 'create':
+        require 'create.php';
         create($cardRepository);
-        require 'overview.php';
         break;
+    case 'update':
+        require 'update.php';
+        update($cardRepository);
     default:
         // overview();
         require 'overview.php';
@@ -56,7 +59,18 @@ function overview()
 
 function create($cardRepository)
 {
-    // TODO: provide the create logic
-    $values = "'{$_GET['movieName']}', '{$_GET['genre']}', '{$_GET['description']}'";
-    $cardRepository->create($values);
+    // Provide the create logic
+    if (!empty($_GET['movieName']) && !empty($_GET['genre']) && !empty($_GET['description'])){
+        $values = "'{$_GET['movieName']}', '{$_GET['genre']}', '{$_GET['description']}'";
+        $cardRepository->create($values);
+    }
+}
+
+function update($cardRepository)
+{
+    // Provide the create logic
+    if (!empty($_GET['movieName']) && !empty($_GET['genre']) && !empty($_GET['description'])){
+        $values = "'{$_GET['movieName']}', '{$_GET['genre']}', '{$_GET['description']}'";
+        $cardRepository->update($values);
+    }
 }
