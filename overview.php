@@ -21,7 +21,7 @@
             <td style="border-bottom: solid 1px;"><?= $card['name'] ?></td>
             <td style="border-bottom: solid 1px;"><?= $card['genre'] ?></td>
             <td style="border-bottom: solid 1px;"><?= $card['description'] ?></td>
-            <td style="border-bottom: solid 1px;"><a href="<?= "?id={$card['id']}&movieName={$card['name']}&genre={$card['genre']}&description={$card['description']}&action=update"?>">Update</a></td>
+            <td style="border-bottom: solid 1px;"><a href="<?= "?id={$card['id']}&action=update"?>">Update</a></td>
         </tr>
     <?php endforeach; ?>
 </table>
