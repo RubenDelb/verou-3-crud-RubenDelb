@@ -29,7 +29,7 @@ class CardRepository
     // Get all
     public function get(): PDOStatement
     {
-        // TODO: replace dummy data by real one
+        // Replace dummy data by real one
         $query = "SELECT * FROM movies";
         $result = $this->databaseManager->connection->query($query);
         return $result;
@@ -37,7 +37,7 @@ class CardRepository
         // return $this->databaseManager->connection-> (runYourQueryHere)
     }
 
-    public function update($array): void
+    public function update(): void
     {
         $query = "UPDATE movies SET `name` = '{$_GET['movieName']}', genre = '{$_GET['genre']}', `description` = '{$_GET['description']}' WHERE id = '{$_SESSION['id']}';";
         $this->databaseManager->connection->query($query);
@@ -48,5 +48,4 @@ class CardRepository
     {
 
     }
-
 }

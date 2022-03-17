@@ -81,6 +81,6 @@ function update($databaseManager, $cardRepository): void
     pre($_GET);
     require 'update.php';
     if (!empty($_GET['movieName'])){
-        $cardRepository->update($fetch);
+        $cardRepository->update();
     }
 }
