@@ -45,10 +45,14 @@ switch ($action) {
         create($cardRepository);
         break;
     case 'update':
-        update($databaseManager, $cardRepository);
+        update($cardRepository);
         break;
     case 'delete':
         $cardRepository->delete();
+        break;
+    case 'show':
+        show($cardRepository);
+        break;
     default:
         // overview();
         require 'overview.php';
@@ -56,32 +60,32 @@ switch ($action) {
         break;
 }
 
-function overview()
+function overview(): void
 {
     // Load your view
     // Tip: you can load this dynamically and based on a variable, if you want to load another view
     require 'overview.php';
 }
 
-function create($cardRepository)
+function create($cardRepository): void
 {
     // Provide the create logic
     if (!empty($_GET['movieName']) && !empty($_GET['genre']) && !empty($_GET['description'])){
-        $values = "'{$_GET['movieName']}', '{$_GET['genre']}', '{$_GET['description']}'";
-        $cardRepository->create($values);
+        $cardRepository->create();
     }
 }
 
-function update($databaseManager, $cardRepository): void
+function update($cardRepository): void
 {
-    $query = "SELECT * FROM movies WHERE id= '{$_SESSION['id']}'"; // Fetch data from the table movies using id
-    $result = $databaseManager->connection->query($query);
-    $fetch = $result->fetch(PDO::FETCH_ASSOC);
-    pre($fetch);
-    // $singleRow = mysqli_fetch_assoc($result);
-    pre($_GET);
+    $fetch = $cardRepository->find();
     require 'update.php';
     if (!empty($_GET['movieName'])){
         $cardRepository->update();
     }
+}
+
+function show($cardRepository): void
+{
+    $fetch = $cardRepository->find();
+    require 'show.php';
 }
