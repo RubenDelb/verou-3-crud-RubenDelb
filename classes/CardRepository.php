@@ -13,41 +13,44 @@ class CardRepository
         $this->databaseManager = $databaseManager;
     }
 
-    public function create($values): void
+    public function create(): void
     {
-        $query = "INSERT IGNORE INTO movies (`name`, genre, `description`) VALUES ($values);";
-        $this->databaseManager->connection->query($query);
+        $query = "INSERT IGNORE INTO movies (`name`, genre, `description`) VALUES (:movieName, :genre, :movieDescription)";
+        $prepare = $this->databaseManager->connection->prepare($query);
+        $prepare->execute(array(':movieName' => "{$_GET['movieName']}", ':genre' => "{$_GET['genre']}", ':movieDescription' => "{$_GET['description']}"));
         header('Location: index.php');
     }
 
-    // Get one
+    // Get one, Fetch data (1row) from the table 'movies' using  the id
     public function find(): array
     {
-
+        $query = "SELECT * FROM movies WHERE id= '{$_SESSION['id']}'";
+        $result = $this->databaseManager->connection->query($query);
+        $fetch = $result->fetch(PDO::FETCH_ASSOC);
+        return $fetch;
     }
 
     // Get all
     public function get(): PDOStatement
     {
-        // Replace dummy data by real one
         $query = "SELECT * FROM movies";
         $result = $this->databaseManager->connection->query($query);
         return $result;
-        // We get the database connection first, so we can apply our queries with it
-        // return $this->databaseManager->connection-> (runYourQueryHere)
     }
 
     public function update(): void
     {
-        $query = "UPDATE movies SET `name` = '{$_GET['movieName']}', genre = '{$_GET['genre']}', `description` = '{$_GET['description']}' WHERE id = '{$_SESSION['id']}';";
-        $this->databaseManager->connection->query($query);
+        $query = "UPDATE movies SET `name` = :movieName, genre = :genre, `description` = :movieDescription WHERE id = :id;";
+        $prepare = $this->databaseManager->connection->prepare($query);
+        $prepare->execute(array(':movieName' => "{$_GET['movieName']}", ':genre' => "{$_GET['genre']}", ':movieDescription' => "{$_GET['description']}", ':id' => "{$_SESSION['id']}"));
         header('Location: index.php');
     }
 
     public function delete(): void
     {
-        $query = "DELETE FROM movies WHERE id = '{$_SESSION['id']}';";
-        $this->databaseManager->connection->query($query);
+        $query = "DELETE FROM movies WHERE id = :id;";
+        $prepare = $this->databaseManager->connection->prepare($query);
+        $prepare->execute(array(':id' => "{$_SESSION['id']}"));
         header('Location: index.php');
     }
 }
