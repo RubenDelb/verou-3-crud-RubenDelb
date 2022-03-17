@@ -48,7 +48,7 @@ switch ($action) {
         update($cardRepository);
         break;
     case 'delete':
-        $cardRepository->delete();
+        delete($cardRepository);
         break;
     case 'show':
         show($cardRepository);
@@ -81,6 +81,15 @@ function update($cardRepository): void
     require 'update.php';
     if (!empty($_GET['movieName'])){
         $cardRepository->update();
+    }
+}
+
+function delete($cardRepository): void
+{
+    $fetch = $cardRepository->find();
+    require 'delete.php';
+    if (!empty($_GET['deleteCheck'])){
+        $cardRepository->delete();
     }
 }
 
