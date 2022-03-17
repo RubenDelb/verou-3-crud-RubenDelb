@@ -8,13 +8,13 @@
 </head>
 <body>
     <form method="get" action="">
-    <label for="movieName">Change the name of the movie:</label>
-    <input type="text" id="movieName" name="movieName" value="<?= $_GET['movieName'] ?>"><br><br>
-    <label for="genre">Change the genre?</label>
-    <input type="text" id="genre" name="genre" value="<?= $_GET['genre'] ?>"><br><br>
-    <label for="description">Change the Description of the movie:</label>
-    <input type="text" id="description" name="description" value="<?= $_GET['description'] ?>"><br><br>
-    <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
-    <input type="submit" name="action" value="update">
+        <label for="movieName">Change the name of the movie:</label>
+        <input type="text" id="movieName" name="movieName" value="<?=$fetch['name']?>"><br><br>
+        <label for="genre">Change the genre?</label>
+        <input type="text" id="genre" name="genre" value="<?=$fetch['genre']?>"><br><br>
+        <label for="description">Change the Description of the movie:</label>
+        <input type="text" id="description" name="description" value="<?=$fetch['description']?>"><br><br>
+        <input type="submit" name="action" value="update">
+    </form>
 </body>
 </html>

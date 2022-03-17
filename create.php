@@ -8,14 +8,14 @@
 </head>
 <body>
     <form method="get" action="index.php">
-    <label for="movieName">Enter the name of the movie:</label>
-    <input type="text" id="movieName" name="movieName"><br><br>
-    <label for="genre">What's the genre?</label>
-    <input type="text" id="genre" name="genre"><br><br>
-    <label for="description">Description of the movie:</label>
-    <input type="text" id="description" name="description"><br><br>
-    <label for="action">What do you want to do?</label>
-    <input type="submit" name="action" value="create">
-</form>
+        <label for="movieName">Enter the name of the movie:</label>
+        <input type="text" id="movieName" name="movieName"><br><br>
+        <label for="genre">What's the genre?</label>
+        <input type="text" id="genre" name="genre"><br><br>
+        <label for="description">Description of the movie:</label>
+        <input type="text" id="description" name="description"><br><br>
+        <label for="action">What do you want to do?</label>
+        <input type="submit" name="action" value="create">
+    </form>
 </body>
 </html>
