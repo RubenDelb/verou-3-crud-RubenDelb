@@ -16,12 +16,14 @@
     <th style="border: solid 1px">Genre</th>
     <th style="border: solid 1px">Description</th>
     <th style="border: solid 1px">Update</th>
+    <th style="border: solid 1px">Delete</th>
     <?php foreach ($cards as $card) : ?>
         <tr>
             <td style="border-bottom: solid 1px;"><?= $card['name'] ?></td>
             <td style="border-bottom: solid 1px;"><?= $card['genre'] ?></td>
             <td style="border-bottom: solid 1px;"><?= $card['description'] ?></td>
             <td style="border-bottom: solid 1px;"><a href="<?= "?id={$card['id']}&action=update"?>">Update</a></td>
+            <td style="border-bottom: solid 1px;"><a href="<?= "?id={$card['id']}&action=delete"?>">Delete</a></td>
         </tr>
     <?php endforeach; ?>
 </table>

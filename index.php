@@ -47,6 +47,8 @@ switch ($action) {
     case 'update':
         update($databaseManager, $cardRepository);
         break;
+    case 'delete':
+        $cardRepository->delete();
     default:
         // overview();
         require 'overview.php';
@@ -72,7 +74,6 @@ function create($cardRepository)
 
 function update($databaseManager, $cardRepository): void
 {
-    // Provide the create logic
     $query = "SELECT * FROM movies WHERE id= '{$_SESSION['id']}'"; // Fetch data from the table movies using id
     $result = $databaseManager->connection->query($query);
     $fetch = $result->fetch(PDO::FETCH_ASSOC);

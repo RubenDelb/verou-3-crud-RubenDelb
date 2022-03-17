@@ -46,6 +46,8 @@ class CardRepository
 
     public function delete(): void
     {
-
+        $query = "DELETE FROM movies WHERE id = '{$_SESSION['id']}';";
+        $this->databaseManager->connection->query($query);
+        header('Location: index.php');
     }
 }
